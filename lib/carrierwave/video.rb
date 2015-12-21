@@ -1,4 +1,4 @@
-require 'streamio-ffmpeg'
+require 'rlovelett-ffmpeg'
 require 'carrierwave'
 require 'carrierwave/video/ffmpeg_options'
 require 'carrierwave/video/ffmpeg_theora'
@@ -25,12 +25,12 @@ module CarrierWave
 
     end
 
-    def encode_ogv(opts)
+    def encode_ogv(opts={})
       # move upload to local cache
       cache_stored_file! if !cached?
 
-      tmp_path  = File.join( File.dirname(current_path), "tmpfile.ogv" )
       @options = CarrierWave::Video::FfmpegOptions.new('ogv', opts)
+      tmp_path = File.join( File.dirname(current_path), "tmpfile.ogv" )
 
       with_trancoding_callbacks do
         transcoder = CarrierWave::Video::FfmpegTheora.new(current_path, tmp_path)
