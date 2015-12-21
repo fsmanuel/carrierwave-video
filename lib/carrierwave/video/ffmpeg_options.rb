@@ -81,16 +81,16 @@ module CarrierWave
             case format
             when 'mp4'
               h[:video_codec] = 'libx264'
-              h[:audio_codec] = 'libfaac'
+              h[:audio_codec] = 'libfdk_aac'
               h[:custom] = '-qscale 0 -preset slow -g 30'
             when 'ogv'
               h[:video_codec] = 'libtheora'
               h[:audio_codec] = 'libvorbis'
-              h[:custom] = '-b 1500k -ab 160000 -g 30'
+              h[:custom] = '-b:v 1500k -b:a 160000 -g 30'
             when 'webm'
               h[:video_codec] = 'libvpx'
               h[:audio_codec] = 'libvorbis'
-              h[:custom] = '-b 1500k -ab 160000 -f webm -g 30'
+              h[:custom] = '-b:v 1500k -b:a 160000 -f webm -g 30'
             end
           end
         end
